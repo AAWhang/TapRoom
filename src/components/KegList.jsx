@@ -14,14 +14,18 @@ function KegList(props){
           price={keg.price}
           alc={keg.alc}
           key={keg.id}
-          pints={keg.pints}/>
+          kegId={keg.id}
+          pints={keg.pints}
+          decFunc={props.dec}
+          />
       )}
     </div>
   );
 }
 
 KegList.propTypes = {
-  kegList: PropTypes.array
+  kegList: PropTypes.array,
+  dec: PropTypes.func
 };
 
 export default KegList;

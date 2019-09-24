@@ -9,7 +9,6 @@ class App extends React.Component {
 
   handleAddingNewKegToList(newKeg) {
     var newMasterKegList = this.state.masterKegList.slice();
-    newKeg.formattedWaitTime = (newKeg.timeOpen).fromNow(true);
     newMasterKegList.push(newKeg);
     this.setState({ masterKegList: newMasterKegList });
   }
@@ -20,25 +19,38 @@ class App extends React.Component {
       masterKegList: []
     };
     this.handleAddingNewKegToList = this.handleAddingNewKegToList.bind(this);
+    this.decrimentPints = this.decrimentPints.bind(this);
   }
 
-  componentDidMount() {
-    this.waitTimeUpdateTimer = setInterval(() =>
-      this.updateKegElapsedWaitTime(),
-    800
-    );
-  }
+  // componentDidMount() {
+  //   this.waitTimeUpdateTimer = setInterval(() =>
+  //     this.updateKegElapsedWaitTime(),
+  //   800
+  //   );
+  // }
 
-  updateKegElapsedWaitTime() {
-    let newMasterKegList = this.state.masterKegList.slice();
-    newMasterKegList.forEach((keg) =>
-      keg.formattedWaitTime = (keg.timeOpen).fromNow(true)
-    );
+  // updateKegElapsedWaitTime() {
+  //   let newMasterKegList = this.state.masterKegList.slice();
+  //   newMasterKegList.forEach((keg) =>
+  //     keg.formattedWaitTime = (keg.timeOpen).fromNow(true)
+  //   );
+  //   this.setState({ masterKegList: newMasterKegList });
+  // }
+
+  // componentWillUnmount() {
+  //   clearInterval(this.waitTimeUpdateTimer);
+  // }
+
+  decrimentPints(id) {
+    // const {id} = props.location.state
+    console.log(id);
+    let newMasterKegList = this.state.masterKegList.map(x => { 
+      if (x.id === id) {
+        console.log(id)
+        x.pints--;
+      }
+    });
     this.setState({ masterKegList: newMasterKegList });
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.waitTimeUpdateTimer);
   }
 
   render() {
@@ -46,7 +58,8 @@ class App extends React.Component {
       <div>
         <Header />
         <Switch>
-          <Route exact path='/' render={() => <KegList kegList={this.state.masterKegList} />} />
+          <Route exact path='/' render={() => <KegList kegList={this.state.masterKegList} dec={this.decrimentPints} />} />
+          <Route path ='/dec' render={() => <KegList dec={this.decrimentPints} kegList={this.state.masterKegList}/> } />
           <Route path='/newkeg' render={() => <NewKegControl onNewKegCreation={this.handleAddingNewKegToList} />} />
           <Route component={Error404} />
         </Switch>
