@@ -46,10 +46,14 @@ class App extends React.Component {
     console.log(id);
     let newMasterKegList = this.state.masterKegList.map(x => { 
       if (x.id === id) {
-        console.log(id)
+        console.log("TRUE: ", id)
         x.pints--;
+        console.log("X: ", x);
+        return x;
       }
     });
+    console.log("original keglist: ", this.state);
+    console.log("new list: ", newMasterKegList);
     this.setState({ masterKegList: newMasterKegList });
   }
 
