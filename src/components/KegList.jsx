@@ -21,6 +21,7 @@ function KegList(props){
           pints={keg.pints}
           decFunc={props.dec}
           delFunc={props.del}
+          addDrink={props.addDrink}
           />
       )}
     </div>
@@ -30,7 +31,8 @@ function KegList(props){
 KegList.propTypes = {
   kegList: PropTypes.array,
   dec: PropTypes.func,
-  del: PropTypes.func
+  del: PropTypes.func,
+  addDrink: PropTypes.func
 };
 
 export default KegList;

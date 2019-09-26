@@ -17,10 +17,11 @@ function Keg(props){
   return (
     <div>
       <h3>{props.brand} - {props.names}</h3>
-      <p><em>${props.price} {props.alc}% alcohol</em></p>
+      <p><em>${props.price} | {props.alc}% alcohol</em></p>
       {pints}
       <button onClick={() => {props.decFunc(props.kegId)}}>Serve Pint</button>
       <button onClick={() => {props.delFunc(props.kegId)}}>Delete Keg</button>
+      <button onClick={() => {props.addDrink(props.kegId)}}>Order</button>
       </div>
   );
 }
@@ -33,7 +34,8 @@ Keg.propTypes = {
   price: PropTypes.string,
   alc: PropTypes.string,
   dec: PropTypes.func,
-  del: PropTypes.func
+  del: PropTypes.func,
+  addDrink: PropTypes.func
 };
 
 export default Keg;
