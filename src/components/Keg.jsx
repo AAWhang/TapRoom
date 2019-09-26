@@ -19,7 +19,6 @@ function Keg(props){
       <h3>{props.brand} - {props.names}</h3>
       <p><em>${props.price} {props.alc}% alcohol</em></p>
       {pints}
-      <p>id: {props.kegId}</p>
       <button onClick={() => {props.decFunc(props.kegId)}}>Serve Pint</button>
       <button onClick={() => {props.delFunc(props.kegId)}}>Delete Keg</button>
       </div>

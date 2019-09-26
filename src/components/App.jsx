@@ -21,6 +21,10 @@ class App extends React.Component {
     this.handleAddingNewKegToList = this.handleAddingNewKegToList.bind(this);
     this.decrimentPints = this.decrimentPints.bind(this);
     this.deleteKeg = this.deleteKeg.bind(this);
+    this.sortByName = this.sortByName.bind(this);
+    this.sortByBrand = this.sortByBrand.bind(this);
+    this.sortByPrice = this.sortByPrice.bind(this);
+    this.sortByAlc = this.sortByAlc.bind(this);
   }
 
   // componentDidMount() {
@@ -60,12 +64,32 @@ class App extends React.Component {
     this.setState({ masterKegList: newMasterKegList });
   }
 
+  sortByName() {
+    let newMasterKegList = this.state.masterKegList.sort((a, b) => (a.names > b.names) ? 1 : -1 );
+    this.setState({ masterKegList: newMasterKegList });
+  }
+
+  sortByBrand() {
+    let newMasterKegList = this.state.masterKegList.sort((a, b) => (a.brand > b.brand) ? 1 : (a.brand === b.brand) ? ((a.names > b.names) ? 1 : -1) : -1 );
+    this.setState({ masterKegList: newMasterKegList });
+  }
+
+  sortByPrice() {
+    let newMasterKegList = this.state.masterKegList.sort((a,b) => a.price - b.price);
+    this.setState({ masterKegList: newMasterKegList });
+  }
+
+  sortByAlc() {
+    let newMasterKegList = this.state.masterKegList.sort((a,b) => a.alc - b.alc);
+    this.setState({ masterKegList: newMasterKegList });
+  }
+
   render() {
     return (
       <div>
         <Header />
         <Switch>
-          <Route exact path='/' render={() => <KegList kegList={this.state.masterKegList} dec={this.decrimentPints} del={this.deleteKeg} />} />          
+          <Route exact path='/' render={() => <KegList kegList={this.state.masterKegList} dec={this.decrimentPints} del={this.deleteKeg} sbn={this.sortByName} sbb={this.sortByBrand} sbp={this.sortByPrice} sba={this.sortByAlc} />} />          
            <Route path='/newkeg' render={() => <NewKegControl onNewKegCreation={this.handleAddingNewKegToList} />} />
           <Route component={Error404} />
         </Switch>

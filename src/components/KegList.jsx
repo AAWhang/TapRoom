@@ -7,7 +7,10 @@ import PropTypes from 'prop-types';
 function KegList(props){
   return (
     <div>
-      
+      <button onClick={() => {props.sbn()}}>Name</button>
+      <button onClick={() => {props.sbb()}}>Brand</button>
+      <button onClick={() => {props.sbp()}}>Price</button>
+      <button onClick={() => {props.sba()}}>Alcohol Percent</button>
       {props.kegList.map((keg) =>
         <Keg names={keg.names}
           brand={keg.brand}
