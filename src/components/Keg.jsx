@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import App from './App';
 
 
 
@@ -15,8 +13,8 @@ function Keg(props){
       <p>Pints: {props.pints}</p>
       <p>id: {props.kegId}</p>
       <button onClick={() => {props.decFunc(props.kegId)}}>Serve Pint</button>
-      {/* <Link to={{ pathname: '/dec', state: { id: props.kegId} }} >Serve Pint</Link> */}
-    </div>
+      <button onClick={() => {props.delFunc(props.kegId)}}>Delete Keg</button>
+      </div>
   );
 }
 
@@ -27,7 +25,8 @@ Keg.propTypes = {
   brand: PropTypes.string.isRequired,
   price: PropTypes.string,
   alc: PropTypes.string,
-  dec: PropTypes.func
+  dec: PropTypes.func,
+  del: PropTypes.func
 };
 
 export default Keg;

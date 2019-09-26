@@ -20,6 +20,7 @@ class App extends React.Component {
     };
     this.handleAddingNewKegToList = this.handleAddingNewKegToList.bind(this);
     this.decrimentPints = this.decrimentPints.bind(this);
+    this.deleteKeg = this.deleteKeg.bind(this);
   }
 
   // componentDidMount() {
@@ -42,18 +43,20 @@ class App extends React.Component {
   // }
 
   decrimentPints(id) {
-    // const {id} = props.location.state
-    console.log(id);
     let newMasterKegList = this.state.masterKegList.map(x => { 
       if (x.id === id) {
-        console.log("TRUE: ", id)
         x.pints--;
-        console.log("X: ", x);
         return x;
       }
+      return x;
     });
-    console.log("original keglist: ", this.state);
-    console.log("new list: ", newMasterKegList);
+    this.setState({ masterKegList: newMasterKegList });
+  }
+
+  deleteKeg(id) {
+    console.log(id);
+    console.log(this.state.masterKegList);
+    let newMasterKegList = this.state.masterKegList.filter(x => x.id != id); 
     this.setState({ masterKegList: newMasterKegList });
   }
 
@@ -62,9 +65,8 @@ class App extends React.Component {
       <div>
         <Header />
         <Switch>
-          <Route exact path='/' render={() => <KegList kegList={this.state.masterKegList} dec={this.decrimentPints} />} />
-          <Route path ='/dec' render={() => <KegList dec={this.decrimentPints} kegList={this.state.masterKegList}/> } />
-          <Route path='/newkeg' render={() => <NewKegControl onNewKegCreation={this.handleAddingNewKegToList} />} />
+          <Route exact path='/' render={() => <KegList kegList={this.state.masterKegList} dec={this.decrimentPints} del={this.deleteKeg} />} />          
+           <Route path='/newkeg' render={() => <NewKegControl onNewKegCreation={this.handleAddingNewKegToList} />} />
           <Route component={Error404} />
         </Switch>
       </div>
